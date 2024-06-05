@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown naar JIB Reis 2024</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://www.flightgift.com/media/wp/FG/2022/07/holiday-dest-friends-cover.jpg'); /* Voeg een geschikte vakantiesfeer afbeelding toe */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        #header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+        }
+        #countdown {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        #countdown h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        #countdown h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #ffeb3b;
+        }
+        #time {
+            font-size: 2em;
+        }
+        #hints {
+            margin-top: 40px;
+            font-size: 1em;
+            text-align: center;
+        }
+        .hint {
+            margin: 10px 0;
+        }
+        #audio-control {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #play-button {
+            background-color: #ffeb3b;
+            border: none;
+            color: #000;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            text-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Logo_of_Gemeente_Amsterdam.svg" alt="Logo van de Gemeente Amsterdam" width="100">
+    </div>
+    <div id="countdown">
+        <h1>JIB reis 2024</h1>
+        <h2>24 t/m 27 oktober 2024</h2>
+        <div id="time"></div>
+        <div id="hints">
+            <h2 style="font-size: 1.5em;">Raad jij de bestemming?</h2>
+            <div class="hint" id="hint1">Hint 1: ----</div>
+            <div class="hint" id="hint2">Hint 2: ----</div>
+            <div class="hint" id="hint3">Hint 3: ----</div>
+        </div>
+        <div id="audio-control">
+            <button id="play-button">Speel muziek!</button>
+        </div>
+    </div>
+    <audio id="background-music" src="https://25253.live.streamtheworld.com/TLPSTR21.mp3" loop></audio>
+    <script>
+        // Zet de einddatum op 24 oktober 2024 om 00:00 uur
+        var countdownDate = new Date("2024-10-24T00:00:00").getTime();
+
+        // Update de countdown elke seconde
+        var x = setInterval(function() {
+
+            // Huidige datum en tijd
+            var now = new Date().getTime();
+
+            // Verschil tussen nu en de countdown datum
+            var distance = countdownDate - now;
+
+            // Berekeningen voor dagen, uren, minuten en seconden
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Weergave van de resultaten in het element met id="time"
+            document.getElementById("time").innerHTML = days + "d " + hours + "u " +
+                minutes + "m " + seconds + "s ";
+
+            // Als de countdown voorbij is, laat een bericht zien
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("time").innerHTML = "De JIB reis 2024 is begonnen!";
+                // Voeg hier optionele logica toe
+            }
+        }, 1000);
+
+        // Speel de muziek af wanneer op de knop wordt geklikt
+        document.getElementById("play-button").addEventListener("click", function() {
+            document.getElementById("background-music").play();
+        });
+    </script>
+</body>
+</html>
+
